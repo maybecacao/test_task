@@ -1,5 +1,5 @@
 import React from 'react';
-import MapPoints from './MapPoints';
+import MapPoints from './MapPoints.js';
 
 function App() {
   return (
