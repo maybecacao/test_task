@@ -7,11 +7,10 @@ import { Point } from 'ol/geom.js';
 import { fromLonLat } from 'ol/proj.js';
 import { Feature } from 'ol';
 import { Vector as VectorSource } from 'ol/source.js';
-import { Style, Icon, Fill, Stroke, Text, Circle as CircleStyle } from 'ol/style.js';
+import { Style, Fill, Stroke, Circle as CircleStyle } from 'ol/style.js';
 import { defaults as defaultControls } from 'ol/control.js';
 import Overlay from 'ol/Overlay.js';
 
-// Sample data
 const data = {
     coordinates: [
         {
@@ -313,8 +312,11 @@ const MapComponent = () => {
     const [popupContent, setPopupContent] = useState(null);
 
     useEffect(() => {
+        const savedCoordinates = localStorage.getItem('coordinates');
+        const initialCoordinates = savedCoordinates ? JSON.parse(savedCoordinates) : data.coordinates;
+
         const vectorSource = new VectorSource({
-            features: data.coordinates.map((item, index) => {
+            features: initialCoordinates.map((item, index) => {
                 const feature = new Feature({
                     geometry: new Point(fromLonLat([item.longitude, item.latitude])),
                     name: item.details,
@@ -358,10 +360,15 @@ const MapComponent = () => {
                 const details = feature.get('name');
                 const id = feature.get('id');
 
-                overlayPopup.setPosition(coordinates);  // Show popup
+                overlayPopup.setPosition(coordinates);
                 setPopupContent({ id, coordinates, status, details });
             });
         });
+
+        if (process.env.NODE_ENV === 'development') {
+            window.map = initialMap;
+            window.vectorSource = vectorSource;
+        }
 
         return () => {
             if (initialMap) initialMap.setTarget(null);
@@ -381,15 +388,19 @@ const MapComponent = () => {
     const updatePointStatus = () => {
         if (popupContent) {
             const newStatus = !popupContent.status;
+
             data.coordinates[popupContent.id].status = newStatus;
             data.coordinates[popupContent.id].details = popupContent.details;
 
+            localStorage.setItem('coordinates', JSON.stringify(data.coordinates));
+
             const feature = map.getFeaturesAtPixel(map.getPixelFromCoordinate(popupContent.coordinates))[0];
             feature.set('status', newStatus);
+            feature.set('name', popupContent.details);
             feature.setStyle(createPointStyle(newStatus));
 
-            setPopupContent(null);  // Clear popup content
-            popup.setPosition(undefined);  // Hide popup
+            setPopupContent(null);
+            popup.setPosition(undefined);
         }
     };
 
@@ -399,13 +410,14 @@ const MapComponent = () => {
             <div ref={popupRef} className={`ol-popup ${popupContent ? 'active' : ''}`}>
                 {popupContent && (
                     <div>
-                        <h3>Edit Point Details</h3>
-                        <p>Status: {popupContent.status ? 'Active' : 'Inactive'}</p>
+                        <p><b>Status:</b> {popupContent.status ? 'Active' : 'Inactive'}</p>
+                        <p><b>Comment:</b></p>
                         <textarea
+                            className="border rounded-xl p-2"
                             value={popupContent.details}
                             onChange={(e) => setPopupContent({ ...popupContent, details: e.target.value })}
                         />
-                        <button onClick={updatePointStatus}>Toggle Status & Save</button>
+                        <button className="border rounded-xl p-2 w-full" onClick={updatePointStatus}>Toggle Status & Save</button>
                     </div>
                 )}
             </div>
