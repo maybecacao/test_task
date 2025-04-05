@@ -1,0 +1,847 @@
+# This file was generated. Do not edit manually.
+
+schema {
+    query: GlossaryQuery
+}
+
+interface AccountCompletionRewardsInterface {
+    accountCompletionRewards(platform: String!): [Reward]
+}
+
+interface AchievementsGroupsInterface {
+    achievementsGroups(achievementsGroupId: String, lang: String): [AchievementsGroup]
+}
+
+interface AchievementsInterface {
+    achievements(achievementId: String, lang: String): [Achievements]
+}
+
+interface ArenaBattlesInterface {
+    arenaBattles: [ArenaBattle]
+}
+
+interface BattleModesInterface {
+    battleModes(lang: String): [BattleMode]
+}
+
+interface BattleScenariosInterface {
+    battleScenarios(lang: String): [BattleScenario]
+}
+
+interface BattleTypesInterface {
+    battleTypes(lang: String): [BattleType]
+}
+
+interface CampaignInterface {
+    campaigns: [Campaign]
+}
+
+interface CollectibleAlbumsInterface {
+    collectibleAlbum(albumId: String, lang: String): [CollectibleAlbum]
+}
+
+interface CollectibleCardsInterface {
+    collectibleCards: [CollectibleCard]
+}
+
+interface ComplexityInterface {
+    complexities(lang: String): [ComplexityBase]
+}
+
+interface CrewsInterfaces {
+    crews(crewId: String, crewIds: [String], isCatalogue: Boolean, isPerson: Boolean, isUnique: Boolean, lang: String): [Crew]
+}
+
+interface CurrencyInterface {
+    currencies(lang: String): [Currency]
+}
+
+interface DogTagsInterface {
+    dogTagComponents(componentId: String, componentIds: [String], isCatalogue: Boolean, lang: String): [DogTagComponent]
+}
+
+interface DollsInterface {
+    dolls(dollId: String, dollIds: [String], isCatalogue: Boolean, lang: String): [Doll]
+}
+
+interface EnsignsInterfaces {
+    ensigns(ensignsId: String, ensignsIds: [String], isCatalogue: Boolean, lang: String): [Ensign]
+}
+
+interface FeaturesTagsInterface {
+    featuresTags(lang: String = "ru", vehicleIds: [String]): [VehicleFeaturesTags]
+}
+
+interface GameVersionInterface {
+    version: String
+}
+
+interface ItemInterface {
+    items(itemGroup: String, itemId: String, itemIds: [String], itemType: String, lang: String): [Item]
+}
+
+interface ItemTypesInterface {
+    itemTypes(lang: String): [ItemType]
+}
+
+interface LootBoxInterface {
+    lootbox(lang: String, lootboxId: String, lootboxIds: [String]): [LootBox]
+}
+
+interface MKServiceIconsInterface {
+    icons: MKServiceIcons
+}
+
+interface NationsInterface {
+    nations(lang: String): [Nation]
+}
+
+interface PeculiarityInterface {
+    peculiarities(lang: String): [Peculiarity]
+}
+
+interface PermoflagesInterface {
+    permoflages(isCatalogue: Boolean, lang: String, permoflageId: String, permoflageIds: [String]): [Permoflages]
+}
+
+interface UnlockInterface {
+    unlocks(lang: String, unlockId: Int): [Unlock]
+}
+
+interface VehicleTypesInterface {
+    vehicleTypes(lang: String): [VehicleType]
+}
+
+interface VehiclesInterface {
+    vehicles(isCatalogue: Boolean, lang: String, vehicleId: String, vehicleIds: [String]): [Vehicle]
+}
+
+type Achievements {
+    battleRestriction: L10nField
+    battleTypes: [BattleType]
+    description: L10nField
+    enabled: Boolean
+    group: Int
+    grouping: GroupingAchievements
+    hidden: Boolean
+    icons: IconsAchievements
+    id: ID
+    isBattle: Boolean
+    isProgress: Boolean
+    isRare: Boolean
+    maxProgress: Int
+    maxShipLevel: Int
+    minShipLevel: Int
+    multiple: Boolean
+    name: String
+    onePerBattle: Boolean
+    receivingRestriction: L10nField
+    title: L10nField
+    type: String
+    typeTitle: L10nField
+}
+
+type AchievementsGroup {
+    id: ID
+    sortOrder: Int
+    subgroups: [AchievementsSubGroup]
+    title: L10nField
+}
+
+type AchievementsSubGroup {
+    id: ID
+    sortOrder: Int
+    title: L10nField
+}
+
+type ArenaBattle {
+    arenaId: String
+    battleTypeId: String
+    gameModeId: String
+    id: ID
+    scenarioName: String
+}
+
+type BattleMode {
+    description: L10nField
+    id: ID
+    name: String
+    title: L10nField
+}
+
+type BattleScenario {
+    scenarioName: ID
+    title: L10nField
+}
+
+type BattleType {
+    description: L10nField
+    dossierName: String
+    icons: IconBattleType
+    id: ID
+    name: String
+    title: L10nField
+}
+
+type Campaign {
+    description: L10nField
+    icons: CampaignIcons
+    id: ID
+    isTemporary: Boolean
+    name: String
+    rewards: JSONString
+    tasks: Int
+    title: L10nField
+}
+
+type CampaignIcons {
+    default: MediaUrlField
+}
+
+type Category {
+    icons: IconsFeatureTagsCategory
+    mark: L10nField
+    name: String
+}
+
+type ClanTag {
+    fontColor: String
+    x: Int
+    y: Int
+}
+
+type CollectibleAlbum {
+    cardCost: Int
+    description: L10nField
+    icons: CollectibleAlbumIcons
+    id: ID
+    name: String
+    title: L10nField
+    titleQuotes: L10nField
+}
+
+type CollectibleAlbumIcons {
+    default: MediaUrlField
+    large: MediaUrlField
+    small: MediaUrlField
+}
+
+type CollectibleCard {
+    album: CollectibleAlbum
+    description: L10nField
+    enabled: Boolean
+    id: ID
+    name: String
+    title: L10nField
+}
+
+type Complexity {
+    description: L10nField
+    header: L10nField
+    icons: IconsComplexity
+    level: Int
+}
+
+type ComplexityBase {
+    description: L10nField
+    header: L10nField
+    icons: Icons
+    level: Int
+}
+
+type ComponentIcons {
+    default: MediaUrlField
+    large: MediaUrlField
+    localLarge: String
+    localMedium: String
+    localSmall: String
+    medium: MediaUrlField
+    small: MediaUrlField
+}
+
+type Crew {
+    baseTrainingLevel: Int
+    category: String
+    hasRank: Boolean
+    hasSampleVo: Boolean
+    icons: [CrewIcon]
+    id: ID
+    isPerson: Boolean
+    isRetrainable: Boolean
+    isUnique: Boolean
+    l10nRarity: L10nField
+    name: String
+    nation: Nation
+    nationsToSeat: [Nation]
+    peculiarity: Peculiarity
+    personalizationTypes: [CrewPersonalizationType]
+    skills: [CrewSkill]
+    tags: [String]
+    talents: [CrewTalent]
+    title: L10nField
+    type: String
+    unlocks: [Unlock]
+}
+
+type CrewIcon {
+    default: String
+    maxLevel: Int
+    minLevel: Int
+}
+
+type CrewPersonalizationType {
+    description: L10nField
+    icons: PersonalizationTypesIcons
+    id: Int
+    title: L10nField
+}
+
+type CrewSkill {
+    customization: [CustomizationField]
+    description: L10nField
+    icons: SkillIcons
+    perks: [String]
+    tier: Int
+    title: L10nField
+    typeId: Int
+}
+
+type CrewTalent {
+    description: L10nField
+    icons: TalentsIcons
+    maxTriggerNum: Int
+    perks: [String]
+    title: L10nField
+}
+
+type Currency {
+    description: String
+    icons: CurrencyIcons
+    name: String
+    title: L10nField
+    tooltipDescription: L10nField
+    tooltipGetDescription: L10nField
+    tooltipStatusInfo: L10nField
+}
+
+type CurrencyIcons {
+    default: MediaUrlField
+    extra: MediaUrlField
+    large: MediaUrlField
+    localDefault: String
+    localExtra: String
+    localSmall: String
+    small: MediaUrlField
+}
+
+type CustomizationField {
+    description: [String]
+    type: String
+}
+
+type DogTagComponent {
+    clanTag: ClanTag
+    color: String
+    condition: L10nField
+    description: L10nField
+    icons: ComponentIcons
+    id: ID
+    isColorizable: Boolean
+    isPatch: Boolean
+    name: String
+    quest: L10nField
+    showClanTag: Boolean
+    symbolOffsetY: String
+    tags: [String]
+    textureData: [TextureDataItem]
+    title: L10nField
+    type: String
+}
+
+type Doll {
+    clanTag: DollClanTag
+    condition: L10nField
+    icons: DollIcons
+    id: ID
+    name: String
+    quest: L10nField
+    showClanTag: Boolean
+    symbolOffsetY: String
+    tags: [String]
+    title: L10nField
+    type: String
+}
+
+type DollClanTag {
+    fontColor: String
+    x: Int
+    y: Int
+}
+
+type DollIcons {
+    default: MediaUrlField
+    large: MediaUrlField
+    localLarge: String
+    localSmall: String
+    medium: MediaUrlField
+    small: MediaUrlField
+}
+
+type Ensign {
+    categoryType: String
+    description: L10nField
+    icons: EnsignIcons
+    id: ID
+    name: String
+    prices: Prices
+    tags: [String]
+    title: L10nField
+    titleShort: L10nField
+    ttc: [TTC]
+}
+
+type EnsignIcons {
+    default: MediaUrlField
+    large: MediaUrlField
+    localDefault: String
+    medium: MediaUrlField
+    small: MediaUrlField
+}
+
+type EntityIcons {
+    large: MKRarityIcons
+    small: MKRarityIcons
+}
+
+type GlossaryQuery implements AccountCompletionRewardsInterface & AchievementsGroupsInterface & AchievementsInterface & ArenaBattlesInterface & BattleModesInterface & BattleScenariosInterface & BattleTypesInterface & CampaignInterface & CollectibleAlbumsInterface & CollectibleCardsInterface & ComplexityInterface & CrewsInterfaces & CurrencyInterface & DogTagsInterface & DollsInterface & EnsignsInterfaces & FeaturesTagsInterface & GameVersionInterface & ItemInterface & ItemTypesInterface & LootBoxInterface & MKServiceIconsInterface & NationsInterface & PeculiarityInterface & PermoflagesInterface & UnlockInterface & VehicleTypesInterface & VehiclesInterface {
+    accountCompletionRewards(platform: String!): [Reward]
+    achievements(achievementId: String, lang: String): [Achievements]
+    achievementsGroups(achievementsGroupId: String, lang: String): [AchievementsGroup]
+    arenaBattles: [ArenaBattle]
+    battleModes(lang: String): [BattleMode]
+    battleScenarios(lang: String): [BattleScenario]
+    battleTypes(lang: String): [BattleType]
+    campaigns: [Campaign]
+    collectibleAlbum(albumId: String, lang: String): [CollectibleAlbum]
+    collectibleCards: [CollectibleCard]
+    complexities(lang: String): [ComplexityBase]
+    crews(crewId: String, crewIds: [String], isCatalogue: Boolean, isPerson: Boolean, isUnique: Boolean, lang: String): [Crew]
+    currencies(lang: String): [Currency]
+    dogTagComponents(componentId: String, componentIds: [String], isCatalogue: Boolean, lang: String): [DogTagComponent]
+    dolls(dollId: String, dollIds: [String], isCatalogue: Boolean, lang: String): [Doll]
+    ensigns(ensignsId: String, ensignsIds: [String], isCatalogue: Boolean, lang: String): [Ensign]
+    featuresTags(lang: String = "ru", vehicleIds: [String]): [VehicleFeaturesTags]
+    icons: MKServiceIcons
+    itemTypes(lang: String): [ItemType]
+    items(itemGroup: String, itemId: String, itemIds: [String], itemType: String, lang: String): [Item]
+    lootbox(lang: String, lootboxId: String, lootboxIds: [String]): [LootBox]
+    nations(lang: String): [Nation]
+    peculiarities(lang: String): [Peculiarity]
+    permoflages(isCatalogue: Boolean, lang: String, permoflageId: String, permoflageIds: [String]): [Permoflages]
+    unlocks(lang: String, unlockId: Int): [Unlock]
+    vehicleTypes(lang: String): [VehicleType]
+    vehicles(isCatalogue: Boolean, lang: String, vehicleId: String, vehicleIds: [String]): [Vehicle]
+    version: String
+}
+
+type GroupingAchievements {
+    group: String
+    sortOrder: Int
+    sortOrderInGroup: Int
+    subgroup: String
+}
+
+type IconBattleType {
+    default: MediaUrlField
+}
+
+type Icons {
+    empty: MediaUrlField
+    filled: MediaUrlField
+    localEmpty: String
+    localFilled: String
+}
+
+type IconsAchievements {
+    default: MediaUrlField
+    inactive: MediaUrlField
+    normal: MediaUrlField
+}
+
+type IconsComplexity {
+    empty: MediaUrlField
+    filled: MediaUrlField
+    localEmpty: String
+    localFilled: String
+}
+
+type IconsFeatureTagsCategory {
+    default: MediaUrlField
+    localDefault: String
+}
+
+type IconsTags {
+    large: MediaUrlField
+    localLarge: String
+    localSmall: String
+    small: MediaUrlField
+}
+
+type IconsVehicle {
+    contour: MediaUrlField
+    contourAlive: MediaUrlField
+    contourDead: MediaUrlField
+    default: MediaUrlField
+    large: MediaUrlField
+    localContour: String
+    localContourAlive: String
+    localContourDead: String
+    localSmall: String
+    medium: MediaUrlField
+    small: MediaUrlField
+}
+
+type IconsVehicleClass {
+    default: MediaUrlField
+    elite: MediaUrlField
+    normal: MediaUrlField
+    premium: MediaUrlField
+    special: MediaUrlField
+}
+
+type Item {
+    description: L10nField
+    group: ItemType
+    groupName: String
+    icons: ItemIcons
+    id: ID
+    l10nRarity: L10nField
+    l10nType: L10nField
+    name: String
+    prices: Prices
+    restrictions: ItemRestrictions
+    slot: Int
+    subHeader: L10nField
+    tags: [String]
+    title: L10nField
+    titleShort: L10nField
+    ttc: [TTC]
+    type: ItemType
+    typeName: String
+}
+
+type ItemIcons {
+    default: MediaUrlField
+    extra: MediaUrlField
+}
+
+type ItemRestrictions {
+    levels: [Int]
+    subtype: [String]
+}
+
+type ItemType {
+    icons: ItemTypeIcons
+    name: ID
+    title: L10nField
+}
+
+type ItemTypeIcons {
+    default: MediaUrlField
+}
+
+type LootBox {
+    icons: LootboxIcons
+    id: ID
+    isPremium: Boolean
+    name: String
+    rewards: [Rewards]
+    shortTitle: L10nField
+    title: L10nField
+}
+
+type LootboxIcons {
+    default: MediaUrlField
+    large: MediaUrlField
+    small: MediaUrlField
+}
+
+type MKRarityIcons {
+    legendary: MediaUrlField
+    rare: MediaUrlField
+    special: MediaUrlField
+    standard: MediaUrlField
+    unique: MediaUrlField
+}
+
+type MKServiceIcons {
+    camoboost: EntityIcons
+    flag: EntityIcons
+    mastery: [MasteryRank]
+    ribbon: EntityIcons
+}
+
+type MasteryIcons {
+    local: String
+    web: MediaUrlField
+}
+
+type MasteryRank {
+    icons: MasteryIcons
+    level: String
+}
+
+type Nation {
+    color: HexColorField
+    icons: NationIcons
+    name: ID
+    title: L10nField
+}
+
+type NationIcons {
+    default: MediaUrlField
+    large: MediaUrlField
+    medium: MediaUrlField
+    small: MediaUrlField
+    tiny: MediaUrlField
+}
+
+type Peculiarity {
+    name: ID
+    title: L10nField
+}
+
+type PermoflageRestrictions {
+    forbiddenShips: [String]
+    levels: [Int]
+    nations: [String]
+    specificShips: [String]
+    types: [String]
+}
+
+type PermoflageVehicles {
+    isNative: Boolean
+    title: L10nField
+    vehicle: Vehicle
+}
+
+"Glossary: https://glossary.lstprod.net/glossary/v1/wows/current/wows_permoflages?lang=en"
+type Permoflages {
+    description: L10nField
+    icons: PermoglagesIcons
+    id: ID
+    name: String
+    prices: Prices
+    relatedVehicles: [Vehicle]
+    restrictions: PermoflageRestrictions
+    subType: String
+    tags: [String]
+    title: L10nField
+    titleShort: L10nField
+    type: ItemType
+    typeName: String
+    vehicles: [PermoflageVehicles]
+}
+
+type PermoglagesIcons {
+    default: MediaUrlField
+    large: MediaUrlField
+    localDefault: String
+    medium: MediaUrlField
+    small: MediaUrlField
+}
+
+type PersonalizationTypesIcons {
+    default: MediaUrlField
+}
+
+type Prices {
+    credit: Int
+    gold: Int
+    xp: Int
+}
+
+type Reward {
+    amount: Int
+    crewLevel: Int
+    id: String
+    onlySilver: Boolean
+    shipId: ID
+    type: String
+}
+
+type Rewards {
+    category: String
+    reward: Reward
+    slotId: Int
+    type: String
+}
+
+type SkillIcons {
+    active: MediaUrlField
+    default: MediaUrlField
+    inactive: MediaUrlField
+    penalty: MediaUrlField
+}
+
+type TTC {
+    name: String
+    title: String
+    value: String
+}
+
+type Tags {
+    color: String
+    icons: IconsTags
+    mark: L10nField
+    type: String
+}
+
+type TagsPerCategories {
+    category: Category
+    featuresTags: [Tags]
+}
+
+type TalentsIcons {
+    default: MediaUrlField
+}
+
+type TextureDataItem {
+    background: ComponentIcons
+    border: ComponentIcons
+    id: ID
+}
+
+type Unlock {
+    description: L10nField
+    icon: MediaUrlField
+    id: Int
+    name: String
+    title: L10nField
+    type: Int
+}
+
+type Vehicle {
+    consumables: [VehicleConsumable]
+    description: L10nField
+    hasGoldPrice: Boolean
+    icons: IconsVehicle
+    id: ID
+    isClan: Boolean
+    isPremium: Boolean
+    isSpecial: Boolean
+    level: Int
+    modernizations: [VehicleModernization]
+    name: String
+    nation: Nation
+    nationName: String
+    tags: [String]
+    title: L10nField
+    titleShort: L10nField
+    ttc: [VehicleTTC]
+    type: VehicleType
+    typeName: String
+    weapons: [VehicleWeapon]
+}
+
+type VehicleConsumable {
+    consumableSlot: String
+    description: L10nField
+    group: ItemType
+    groupName: String
+    icons: ItemIcons
+    id: ID
+    l10nRarity: L10nField
+    l10nType: L10nField
+    name: String
+    prices: Prices
+    restrictions: ItemRestrictions
+    slot: Int
+    subHeader: L10nField
+    tags: [String]
+    title: L10nField
+    titleShort: L10nField
+    ttc: [TTC]
+    type: ItemType
+    typeName: String
+}
+
+type VehicleFeaturesTags {
+    complexity: Complexity
+    featuresTags: [Tags]
+    featuresTagsPerCategory: [TagsPerCategories]
+    id: ID
+}
+
+type VehicleModernization {
+    description: L10nField
+    group: ItemType
+    groupName: String
+    icons: ItemIcons
+    id: ID
+    l10nRarity: L10nField
+    l10nType: L10nField
+    modernizationSlot: String
+    name: String
+    prices: Prices
+    restrictions: ItemRestrictions
+    slot: Int
+    subHeader: L10nField
+    tags: [String]
+    title: L10nField
+    titleShort: L10nField
+    ttc: [TTC]
+    type: ItemType
+    typeName: String
+}
+
+type VehicleTTC {
+    description: L10nField
+    name: String
+    title: L10nField
+    unit: L10nField
+    value: Float
+}
+
+type VehicleType {
+    icons: IconsVehicleClass
+    name: ID
+    title: L10nField
+    titleShort: L10nField
+}
+
+type VehicleWeapon {
+    consumables: [VehicleWeaponsConsumable]
+    description: L10nField
+    icons: VehicleWeaponsIcons
+    subBlock: L10nField
+    subHeader: L10nField
+    title: L10nField
+}
+
+type VehicleWeaponsConsumable {
+    description: L10nField
+    icons: VehicleWeaponsIcons
+    subHeader: L10nField
+    title: L10nField
+}
+
+type VehicleWeaponsIcons {
+    default: MediaUrlField
+    localDefault: String
+}
+
+scalar HexColorField
+
+"""
+
+Allows use of a JSON String for input / output from the GraphQL schema.
+
+Use of this type is *not recommended* as you lose the benefits of having a defined, static
+schema (one of the key benefits of GraphQL).
+"""
+scalar JSONString
+
+scalar L10nField
+
+scalar MediaUrlField
